@@ -11,7 +11,7 @@
 - **Ubicación:** `c:\xampp\htdocs\CRM`
 - **Entorno:** XAMPP (Apache + MySQL + PHP) en Windows
 - **Estado:** 🟡 Inicialización — definiendo objetivos y stack
-- **Repositorio git:** local (rama `main`)
+- **Repositorio git:** rama `main` — remoto: https://github.com/ByZoro99/RebootCRM
 
 ## 2. Objetivo
 
