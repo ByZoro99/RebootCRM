@@ -1,0 +1,31 @@
+# Dependencias
+/vendor/
+/node_modules/
+
+# Configuración local / secretos
+.env
+.env.local
+config.local.php
+/config/secrets.php
+
+# Logs y caché
+*.log
+/logs/
+/cache/
+/tmp/
+
+# Subidas de usuarios
+/uploads/
+/public/uploads/
+
+# Editor / SO
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Backups y SQL temporales
+*.bak
+*.sql.gz
+*~
