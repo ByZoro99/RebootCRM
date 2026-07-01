@@ -29,3 +29,21 @@ desktop.ini
 *.bak
 *.sql.gz
 *~
+
+# Laravel
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+/.fleet
+/.nova
+/.phpunit.cache
+/.zed
+/auth.json
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+Homestead.json
+Homestead.yaml
