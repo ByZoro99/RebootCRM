@@ -94,7 +94,7 @@ class AccountResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ProfilesRelationManager::class,
         ];
     }
 
