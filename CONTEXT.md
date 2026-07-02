@@ -64,11 +64,22 @@ CRM/
 - [x] Definir objetivo y alcance del CRM
 - [x] Elegir stack (Laravel + Filament + MySQL)
 - [x] Diseñar el modelo de datos (entidades principales) → en la spec
-- [ ] Plan de implementación de la Fase 1
-- [ ] **Fase 1:** MVP CRM (usuarios/roles, clientes, inventario, ventas/pagos, suscripciones, PWA)
-- [ ] **Fase 2:** WhatsApp saliente (Cloud API multi-número, recordatorios)
+- [x] Plan de implementación de la Fase 1
+- [x] **Fase 1:** MVP CRM (usuarios/roles, clientes, inventario, ventas/pagos, suscripciones, PWA) ✅
+- [x] **Fase 2:** WhatsApp saliente (Cloud API multi-número, envío al vender, recordatorios) ✅
 - [ ] **Fase 3:** Bandeja de chat + bot con "hablar con un humano"
-- [ ] **Fase 4:** Integración con web de ventas + extras (IA opcional)
+- [ ] **Fase 4:** Integración con web de ventas (rebootstream) + extras (IA opcional)
+
+### Estado actual (2026-07-01)
+- **Fase 1 y Fase 2 completas** en `main`. 28 tests en verde.
+- **Pendiente del usuario:** crear la WhatsApp Cloud API en Meta siguiendo
+  [docs/guias/whatsapp-cloud-api-setup.md](docs/guias/whatsapp-cloud-api-setup.md) y pasar
+  los 4 datos (Phone number ID, WABA ID, access token, número) para configurar el envío real.
+- **Hosting objetivo:** cPanel compartido, mismo que la web **rebootstream** (PHP propio),
+  en un subdominio. Falta desplegar (Fase 3/4 o cuando se decida).
+- **Integración rebootstream:** su web ya guarda pedidos en su BD → se conectará vía un
+  endpoint API del CRM que la web llamará al registrar el pedido (pendiente, requiere el
+  código de la web).
 
 ## 7. Notas y pendientes
 

@@ -20,6 +20,16 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/).
   `rebootcrm` en MariaDB, `.env` configurado, migraciones base aplicadas y tests OK.
   > Nota: se usa Laravel 12 (no 11 como decía el plan) porque Composer bloquea Laravel
   > 11 por advisories de seguridad. Filament 3 es compatible con Laravel 12.
+- **Fase 1 completa:** MVP del CRM (roles admin/vendedor/soporte, plataformas, inventario
+  de cuentas/perfiles con contraseña cifrada, clientes, ventas/pagos, suscripciones con
+  vencimiento, dashboard, PWA instalable). 21 tests. Integrado a `main`.
+- **Fase 2 completa (WhatsApp saliente):**
+  - `config/whatsapp.php` + modelo `WhatsappNumber` (multi-número, token cifrado, recurso admin).
+  - `WhatsAppService` (envío de texto y plantillas vía Cloud API) + log `whatsapp_messages`.
+  - Envío automático de los datos de la cuenta por WhatsApp al concretar una venta (best-effort).
+  - Comando `whatsapp:send-reminders` + scheduler diario (09:00) para recordatorios de vencimiento.
+  - Guía `docs/guias/whatsapp-cloud-api-setup.md` para dar de alta la API en Meta.
+  - 28 tests en total (Http::fake, sin llamadas reales). Integrado a `main`.
 
 ---
 
