@@ -23,5 +23,9 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Admin', 'password' => Hash::make('password')]
         );
         $admin->assignRole('admin');
+
+        if (app()->environment('local')) {
+            $this->call(DemoSeeder::class);
+        }
     }
 }
