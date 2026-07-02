@@ -18,12 +18,13 @@ class SaleService
         float $price,
         int $months,
         string $paymentMethod,
+        bool $notify = true,
     ): Sale {
         if ($profile->status !== ProfileStatus::Free) {
             throw new \RuntimeException('El perfil no está disponible.');
         }
 
-        return DB::transaction(function () use ($customer, $profile, $price, $months, $paymentMethod) {
+        $sale = DB::transaction(function () use ($customer, $profile, $price, $months, $paymentMethod) {
             $sale = Sale::create([
                 'customer_id' => $customer->id,
                 'seller_id' => $customer->seller_id,
@@ -60,5 +61,35 @@ class SaleService
 
             return $sale->load('items', 'payments');
         });
+
+        if ($notify && $customer->phone) {
+            $this->notifyDelivery($customer, $profile, $sale);
+        }
+
+        return $sale;
+    }
+
+    private function notifyDelivery(Customer $customer, Profile $profile, Sale $sale): void
+    {
+        try {
+            $account = $profile->account()->with('platform')->first();
+            $subscription = $sale->customer->subscriptions()->latest('id')->first();
+
+            app(\App\Services\WhatsAppService::class)->sendTemplate(
+                to: $customer->phone,
+                template: config('whatsapp.templates.delivery'),
+                params: [
+                    $customer->name,
+                    $account->platform->name ?? 'streaming',
+                    $account->email,
+                    $account->password,
+                    $profile->name,
+                    optional($subscription)->expires_at?->format('d/m/Y') ?? '',
+                ],
+                customer: $customer,
+            );
+        } catch (\Throwable $e) {
+            report($e); // best-effort: no rompe la venta
+        }
     }
 }
